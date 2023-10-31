@@ -13,11 +13,9 @@ jobs:
 
     steps:
     - name: Pull docker image
-      run: docker pull laguagu/cicd-pipeline:latest
+      run: sudo docker pull laguagu/cicd-pipeline:latest
     - name: Delete old docker container
-      run: |
-        docker rm -f cicd-pipeline-container
-        if ($?) { $true } else { $true }
+      run: sudo docker rm -f cicd-pipeline-container || true
     - name: Run docker container
-      run: docker run -d -p 8080:8080 --name cicd-pipeline-container laguagu/cicd-pipeline
+      run: sudo docker run -d -p 8080:8080 --name cicd-pipeline-container laguagu/cicd-pipeline
       
