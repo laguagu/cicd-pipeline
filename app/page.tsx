@@ -1,6 +1,6 @@
 import prisma from "@/prisma/client";
 import Link from "next/link";
-
+import Todotask from "./components/Todotask";
 function getTodos() {
   return prisma.todo.findMany();
 }
@@ -22,7 +22,7 @@ export default async function Home() {
       </header>
       <ul className="m-6">
         {todos.map((todo) => (
-          <li key={todo.id}>{todo.title}</li>
+          <Todotask key={todo.id} {...todo}/>
         ))}
       </ul>
     </div>
