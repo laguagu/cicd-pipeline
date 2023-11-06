@@ -10,9 +10,15 @@ export default async function Home() {
 
   return (
     <div>
-      <header>
-        <h1 className="text-3xl m-6">Todos</h1>
-        <Link href="/new" className="flex">New todo</Link>
+      <header className="m-6 flex justify-between item items-center">
+        <h1 className="text-3xl">Todos</h1>
+        <Link
+          href="/new"
+          className="flex border border-slate-600 rounded p-1 bg-cyan-900
+          font-semibold hover:bg-cyan-600 hover:scale-110 ease-in-out duration-300"
+        >
+          Add todo
+        </Link>
       </header>
       <ul className="m-6">
         {todos.map((todo) => (
