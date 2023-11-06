@@ -1,4 +1,4 @@
-import "@radix-ui/themes";
+import "@radix-ui/themes/styles.css";
 import "./globals.css";
 import { Theme, ThemePanel } from "@radix-ui/themes";
 import type { Metadata } from "next";
@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Theme appearance="light">
+        <Theme appearance="dark">
           <main>{children}</main>
         </Theme>
       </body>
