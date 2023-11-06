@@ -1,21 +1,23 @@
-import prisma from "@/prisma/client"
+import prisma from "@/prisma/client";
+import Link from "next/link";
 
-  // Find all todos
 function getTodos() {
-  return prisma.todo.findMany()
+  return prisma.todo.findMany();
 }
 
 export default async function Home() {
+  const todos = await getTodos();
 
-  const todos = await getTodos()
-  
   return (
-    <main>
-     <ul>
-      {todos.map(todo => (
-        <li key={todo.id}>{todo.title}</li>
-      ))}
-     </ul>
-    </main>
-  )
+    <div>
+      <header className="text-2xl">
+        <h1>Todos</h1>
+      </header>
+      <ul className="">
+        {todos.map((todo) => (
+          <li key={todo.id}>{todo.title}</li>
+        ))}
+      </ul>
+    </div>
+  );
 }
