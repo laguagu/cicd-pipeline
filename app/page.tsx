@@ -10,10 +10,11 @@ export default async function Home() {
 
   return (
     <div>
-      <header className="text-2xl">
-        <h1>Todos</h1>
+      <header>
+        <h1 className="text-3xl m-6">Todos</h1>
+        <Link href="/new" className="flex">New todo</Link>
       </header>
-      <ul className="">
+      <ul className="m-6">
         {todos.map((todo) => (
           <li key={todo.id}>{todo.title}</li>
         ))}
