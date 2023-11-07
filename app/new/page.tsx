@@ -1,10 +1,30 @@
-import {Box,Button,Heading,Text,TextFieldInput,TextFieldRoot,} from "@radix-ui/themes";
+import prisma from "@/prisma/client";
+import {
+  Box,
+  Button,
+  Heading,
+  Text,
+  TextFieldInput,
+  TextFieldRoot,
+} from "@radix-ui/themes";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 async function createTodo(data: FormData) {
-  "use server"
+  "use server";
 
-  console.log("Hello");
+  const title = data.get("title")
+  if (typeof title !== "string" || title.length <= 0) {
+    throw new Error("Invalid title!")
+  }
+  
+  await prisma.todo.create({
+    data: {
+      title: title,
+      completed: false
+    }
+  })
+  redirect("/")
 }
 
 export default function NewTodo() {
@@ -23,9 +43,9 @@ export default function NewTodo() {
       </Heading>
       <form action={createTodo} className="flex justify-center pt-5 gap-x-4">
         <TextFieldRoot>
-          <TextFieldInput placeholder="Todo title"  />
+          <TextFieldInput placeholder="Todo title" name="title"/>
         </TextFieldRoot>
-        <Button color="blue">Add</Button>
+        <Button color="blue" type="submit">Add</Button>
       </form>
     </Box>
   );
