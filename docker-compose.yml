@@ -1,3 +1,5 @@
+# HUOM KUN KÄY LUOMASSA TARVITTAVAT TAULUT KONTIN SISÄLLÄ EXEC KOMENNOLLA npx prisma migrate deploy
+# Tai docker exec -it [kontin_nimi] npx prisma migrate deploy
 version: '3.9'
 services:
   app:

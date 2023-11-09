@@ -19,7 +19,7 @@ import Todotask from "./components/Todotask";
 
 export default async function Home() {
   // const todos = await getTodos();
-  // const todos = await prisma.todo.findMany();
+  const todos = await prisma.todo.findMany();
   return (
     <div>
       <header className="m-6 flex justify-between item items-center">
