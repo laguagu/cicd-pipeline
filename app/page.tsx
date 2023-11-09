@@ -1,8 +1,20 @@
 import prisma from "@/prisma/client";
 import Link from "next/link";
 import Todotask from "./components/Todotask";
-function getTodos() {
+
+function getTodos(){
   return prisma.todo.findMany();
+}
+
+async function toggleTodo(id: number, completed: boolean) {
+  "use server";
+
+  console.log(id, completed);
+  await prisma.todo.update({
+    where: { id },
+    data: { completed },
+  });
+
 }
 
 export default async function Home() {
@@ -21,8 +33,8 @@ export default async function Home() {
         </Link>
       </header>
       <ul className="m-6">
-        {todos.map((todo) => (
-          <Todotask key={todo.id} {...todo}/>
+        {todos.map((todo:any) => (
+          <Todotask key={todo.id} {...todo} toggleTodo={toggleTodo} />
         ))}
       </ul>
     </div>
