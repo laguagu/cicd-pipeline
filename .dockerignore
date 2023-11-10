@@ -1,5 +1,2 @@
-.dockerignore   # Ignore the ignore
 node_modules    # Ignore local node_modules folder
-npm-debug.log   # Debug files
-.npmrc          # If accessing a private npm repository here will be the token used, so ignore to prevent leaking
 .env-*          # Any other environment that we don't want to include
