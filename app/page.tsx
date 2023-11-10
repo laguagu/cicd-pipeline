@@ -2,23 +2,23 @@ import prisma from "@/prisma/client";
 import Link from "next/link";
 import Todotask from "./components/Todotask";
 
-// function getTodos(){
-//   return prisma.todo.findMany();
-// }
+function getTodos(){
+  return prisma.todo.findMany();
+}
 
-// async function toggleTodo(id: number, completed: boolean) {
-//   "use server";
+async function toggleTodo(id: number, completed: boolean) {
+  "use server";
 
-//   console.log(id, completed);
-//   await prisma.todo.update({
-//     where: { id },
-//     data: { completed },
-//   });
+  console.log(id, completed);
+  await prisma.todo.update({
+    where: { id },
+    data: { completed },
+  });
 
-// }
+}
 
 export default async function Home() {
-  // const todos = await getTodos();
+  const todos = await getTodos();
   // const todos = await prisma.todo.findMany();
   return (
     <div>
@@ -32,11 +32,11 @@ export default async function Home() {
           Add todo
         </Link>
       </header>
-      {/* <ul className="m-6">
+      <ul className="m-6">
         {todos.map((todo:any) => (
           <Todotask key={todo.id} {...todo} toggleTodo={toggleTodo} />
         ))}
-      </ul> */}
+      </ul>
     </div>
   );
 }

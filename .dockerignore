@@ -1,2 +1,2 @@
-node_modules    # Ignore local node_modules folder
-.env-*          # Any other environment that we don't want to include
+# node_modules    # Ignore local node_modules folder
+# .env-*          # Any other environment that we don't want to include

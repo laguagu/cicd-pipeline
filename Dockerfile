@@ -1,63 +1,3 @@
-# # Valitse peruskuva (esim. Node.js)
-# FROM node:20
-
-# # Määritä työskentelyhakemisto kuvaan
-# WORKDIR /app
-
-# # Kopioi projektin riippuvuustiedostot (esim. package.json ja package-lock.json) työskentelyhakemistoon
-# COPY package*.json ./
-
-# # Asenna sovelluksen riippuvuudet
-# RUN npm install
-
-# # Kopioi Prisma-kansio ja schema.prisma tiedosto (tai koko projektin tiedostot, jos tarpeen)
-# COPY prisma ./prisma
-
-# # Kopioi muut projektin tiedostot työskentelyhakemistoon
-# COPY . .
-
-# # Generoi Prisma-client
-# RUN npx prisma generate
-
-# # Määritä kuinka sovellus käynnistetään (esim. Node.js-sovelluksissa)
-# EXPOSE 3000  
-# CMD ["npm", "run", "dev"]
-# FROM node:20-alpine AS deps
-# RUN apk add --no-cache libc6-compat
-# WORKDIR /app
-
-# COPY package.json package-lock.json ./
-# RUN  npm install --production
-
-# FROM node:20-alpine AS builder
-# WORKDIR /app
-# COPY --from=deps /app/node_modules ./node_modules
-# COPY . .
-
-# ENV NEXT_TELEMETRY_DISABLED 1
-
-# RUN npm run build
-
-# FROM node:20-alpine AS runner
-# WORKDIR /app
-
-# ENV NODE_ENV production
-# ENV NEXT_TELEMETRY_DISABLED 1
-
-# RUN addgroup --system --gid 1001 nodejs
-# RUN adduser --system --uid 1001 nextjs
-
-# COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
-# COPY --from=builder /app/node_modules ./node_modules
-# COPY --from=builder /app/package.json ./package.json
-
-# USER nextjs
-
-# EXPOSE 3000
-
-# ENV PORT 3000
-
-# CMD ["npm", "start"]
 FROM node:20-alpine AS base
 
 # Install dependencies only when needed
@@ -80,7 +20,11 @@ RUN \
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
+COPY prisma ./prisma
 COPY . .
+
+# Generate Prisma client
+RUN npx prisma generate
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
@@ -108,7 +52,6 @@ COPY --from=builder /app/public ./public
 # Set the correct permission for prerender cache
 RUN mkdir .next
 RUN chown nextjs:nodejs .next
-
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
