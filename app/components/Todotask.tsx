@@ -6,6 +6,7 @@ interface TodoProps {
   toggleTodo: (id: number, completed: boolean) => void;
 }
 
+
 export default function Todotask({
   id,
   title,
