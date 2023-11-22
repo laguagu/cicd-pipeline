@@ -32,8 +32,10 @@ Tämä repositorio sisältää NextJS-pohjaisen Todo-sovelluksen, joka on varust
 CI-pipeline (`ci.yml`) on asetettu reagoimaan `main`-haaran push-toimintoihin. CI-pipeline suorittaa seuraavat tehtävät:
 
 - Rakentaa Docker-imagen sovelluksesta.
+  ```docker build -t laguagu/cicd-pipeline:latest .```
 - Työntää imagen Docker Hubiin.
-
+  ```docker push laguagu/cicd-pipeline:latest```
+  
 ### Continuous Deployment (CD)
 
 CD-pipeline (`cd.yml`) käynnistyy, kun CI-pipeline on valmis. Se suorittaa seuraavat tehtävät:
@@ -41,7 +43,9 @@ CD-pipeline (`cd.yml`) käynnistyy, kun CI-pipeline on valmis. Se suorittaa seur
 - Hakee Docker-imagen Docker Hubista.
   ```docker pull laguagu/cicd-pipeline:latest```
 - Poistaa vanhan Docker-kontin, jos sellainen on olemassa.
+  ```docker rm -f cicd-pipeline-container || true```
 - Käynnistää uuden Docker-kontin EC2-instanssissa.
+   ```docker run -d -p 3000:3000 --name cicd-pipeline-container laguagu/cicd-pipeline```
 
 ## AWS
 AWS Services palveluun on luotu EC2 Instance (t3.micro) Ubuntu-käyttöjärjestelmällä. Instanceen on asennettu Docker, jonka avulla käynnistetään kontti virtuaalikoneen sisällä. GitHub action-runner on asennettu myös instancen sisälle, jotta uusi versio sovelluksesta haetaan automaattisesti jokaisen sovelluksen main-haaran pushin yhteydessä. NGINX avulla on määritelty ohjaamaan liikenne kontin porttiin, sekä tarvittavat konfiguraatiot sovelluksen toiminnallisuuden kannalta.
