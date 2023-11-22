@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# NextJS Todo -sovellus
 
-## Getting Started
+## Kuvaus
 
-First, run the development server:
+Tämä repositorio sisältää NextJS-pohjaisen Todo-sovelluksen, joka on varustettu CI/CD-pipelineilla käyttäen GitHub Actionsia ja Dockeria. Sovellus on paketoitu Docker-imageksi ja julkaistaan AWS EC2-instanssiin.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Teknologiat
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- NextJS
+- TypeScript
+- GitHub Actions
+- Docker/Docker Hub
+- AWS EC2
+- Nginx (porttiohjaus)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Asennus ja käyttöönotto
 
-## Learn More
+1. **Kloonaa repositorio:**
+   ```
+  git clone https://github.com/laguagu/nextJS-todo.git
+  ```
+2. **Asenna riippuvuudet:**
+  ```
+  npm install
+  npm run dev
+   ```
+## CI/CD Pipeline
 
-To learn more about Next.js, take a look at the following resources:
+### Continuous Integration (CI)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+CI-pipeline (`ci.yml`) on asetettu reagoimaan `main`-haaran push-toimintoihin. CI-pipeline suorittaa seuraavat tehtävät:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Rakentaa Docker-imagen sovelluksesta.
+- Työntää imagen Docker Hubiin.
 
-## Deploy on Vercel
+### Continuous Deployment (CD)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+CD-pipeline (`cd.yml`) käynnistyy, kun CI-pipeline on valmis. Se suorittaa seuraavat tehtävät:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Hakee Docker-imagen Docker Hubista.
+- Poistaa vanhan Docker-kontin, jos sellainen on olemassa.
+- Käynnistää uuden Docker-kontin EC2-instanssissa.
+
+## AWS
+AWS Services palveluun on luotu EC2 Instance (t3.micro) ubuntu käyttöjärjestelmällä.
+Intanceen on asennettu Docker, jonka avulla käynnistetään kontti virtuaali koneen sisällä. Github action-runner on asennettu myös intancen sisälle, jotta uusi versio sovelluksesta haetaan automaattisesti jokaisen sovelluksen main haara puskun yhteydessä.
+NGIX avulla on määritelty ohjaamaan liikenne kontin porttiin, sekä tarvittavat configuroinnit sovelluksen toiminnalisuuden kannalta.
+## Dockerfile
+
+Dockerfile kuvaa, miten sovelluksen Docker-image rakennetaan. Se sisältää ohjeet riippuvuuksien asentamiseen, sovelluksen rakentamiseen ja ajamiseen tuotantoympäristössä.
+Docker kuvan optimointiin käytetty Vercel:in tarjoamaa NextJS imagea: https://github.com/vercel/next.js/blob/canary/examples/with-docker-multi-env/docker/production/Dockerfile 
+## Konfigurointi ja ympäristömuuttujat
+
+(Yksityiskohtainen kuvaus mahdollisista konfiguraatioista ja ympäristömuuttujista, joita sovellus käyttää.)
+
+## Tutoriialit ja CI/CD pipelinen luontiin apuna käytetty materiaali
+
+#### CI/CD Pipelinen luontiin ja AWS EC2
+-Creating a Continuous Delivery Pipeline With GitHub Actions: How to Deploy To AWS EC2 Instantly! - https://www.youtube.com/watch?v=rRes9LM-Jh8
+-Next.js Dockerfile - https://github.com/vercel/next.js/blob/canary/examples/with-docker-multi-env/docker/production/Dockerfile
