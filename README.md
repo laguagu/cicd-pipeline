@@ -57,5 +57,5 @@ Docker kuvan optimointiin käytetty Vercel:in tarjoamaa NextJS imagea: https://g
 ## Tutoriialit ja CI/CD pipelinen luontiin apuna käytetty materiaali
 
 #### CI/CD Pipelinen luontiin ja AWS EC2
--Creating a Continuous Delivery Pipeline With GitHub Actions: How to Deploy To AWS EC2 Instantly! - https://www.youtube.com/watch?v=rRes9LM-Jh8
--Next.js Dockerfile - https://github.com/vercel/next.js/blob/canary/examples/with-docker-multi-env/docker/production/Dockerfile
+<p>Creating a Continuous Delivery Pipeline With GitHub Actions: How to Deploy To AWS EC2 Instantly! <br> https://www.youtube.com/watch?v=rRes9LM-Jh8</p>
+<p>Next.js Dockerfile <br> https://github.com/vercel/next.js/blob/canary/examples/with-docker-multi-env/docker/production/Dockerfile </p>
