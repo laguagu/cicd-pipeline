@@ -43,13 +43,12 @@ CD-pipeline (`cd.yml`) käynnistyy, kun CI-pipeline on valmis. Se suorittaa seur
 - Käynnistää uuden Docker-kontin EC2-instanssissa.
 
 ## AWS
-AWS Services palveluun on luotu EC2 Instance (t3.micro) ubuntu käyttöjärjestelmällä.
-Intanceen on asennettu Docker, jonka avulla käynnistetään kontti virtuaali koneen sisällä. Github action-runner on asennettu myös intancen sisälle, jotta uusi versio sovelluksesta haetaan automaattisesti jokaisen sovelluksen main haara puskun yhteydessä.
-NGIX avulla on määritelty ohjaamaan liikenne kontin porttiin, sekä tarvittavat configuroinnit sovelluksen toiminnalisuuden kannalta.
+AWS Services palveluun on luotu EC2 Instance (t3.micro) Ubuntu-käyttöjärjestelmällä. Instanceen on asennettu Docker, jonka avulla käynnistetään kontti virtuaalikoneen sisällä. GitHub action-runner on asennettu myös instancen sisälle, jotta uusi versio sovelluksesta haetaan automaattisesti jokaisen sovelluksen main-haaran pushin yhteydessä. NGINX avulla on määritelty ohjaamaan liikenne kontin porttiin, sekä tarvittavat konfiguraatiot sovelluksen toiminnallisuuden kannalta.
+
 ## Dockerfile
 
 Dockerfile kuvaa, miten sovelluksen Docker-image rakennetaan. Se sisältää ohjeet riippuvuuksien asentamiseen, sovelluksen rakentamiseen ja ajamiseen tuotantoympäristössä.
-Docker kuvan optimointiin käytetty Vercel:in tarjoamaa NextJS imagea: https://github.com/vercel/next.js/blob/canary/examples/with-docker-multi-env/docker/production/Dockerfile 
+Docker kuvan optimointiin käytetty Vercelin tarjoamaa NextJS-imagea: https://github.com/vercel/next.js/blob/canary/examples/with-docker-multi-env/docker/production/Dockerfile 
 ## Konfigurointi ja ympäristömuuttujat
 
 (Yksityiskohtainen kuvaus mahdollisista konfiguraatioista ja ympäristömuuttujista, joita sovellus käyttää.)
