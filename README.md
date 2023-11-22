@@ -17,14 +17,14 @@ Tämä repositorio sisältää NextJS-pohjaisen Todo-sovelluksen, joka on varust
 ## Asennus ja käyttöönotto
 
 1. **Kloonaa repositorio:**
-   ```
+```bash
   git clone https://github.com/laguagu/nextJS-todo.git
-  ```
+```
 2. **Asenna riippuvuudet:**
-  ```
+```bash
   npm install
   npm run dev
-   ```
+```
 ## CI/CD Pipeline
 
 ### Continuous Integration (CI)
