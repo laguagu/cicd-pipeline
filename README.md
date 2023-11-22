@@ -39,6 +39,7 @@ CI-pipeline (`ci.yml`) on asetettu reagoimaan `main`-haaran push-toimintoihin. C
 CD-pipeline (`cd.yml`) käynnistyy, kun CI-pipeline on valmis. Se suorittaa seuraavat tehtävät:
 
 - Hakee Docker-imagen Docker Hubista.
+  ```docker pull laguagu/cicd-pipeline:latest```
 - Poistaa vanhan Docker-kontin, jos sellainen on olemassa.
 - Käynnistää uuden Docker-kontin EC2-instanssissa.
 
