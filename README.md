@@ -49,9 +49,10 @@ AWS Services palveluun on luotu EC2 Instance (t3.micro) Ubuntu-käyttöjärjeste
 
 Dockerfile kuvaa, miten sovelluksen Docker-image rakennetaan. Se sisältää ohjeet riippuvuuksien asentamiseen, sovelluksen rakentamiseen ja ajamiseen tuotantoympäristössä.
 Docker kuvan optimointiin käytetty Vercelin tarjoamaa NextJS-imagea: https://github.com/vercel/next.js/blob/canary/examples/with-docker-multi-env/docker/production/Dockerfile 
-## Konfigurointi ja ympäristömuuttujat
 
-(Yksityiskohtainen kuvaus mahdollisista konfiguraatioista ja ympäristömuuttujista, joita sovellus käyttää.)
+## Ympäristömuuttujat
+
+DOCKER_PASSWORD, DOCKER_USERNAME
 
 ## Tutoriialit ja CI/CD pipelinen luontiin apuna käytetty materiaali
 
