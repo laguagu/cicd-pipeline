@@ -17,7 +17,6 @@ import Todotask from "./components/Todotask";
 
 // }
 
-
 export default async function Home() {
   // const todos = await getTodos();
   // const todos = await prisma.todo.findMany();
