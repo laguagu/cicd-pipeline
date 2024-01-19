@@ -1,4 +1,4 @@
-# NextJS Todo -sovellus
+# CI/CD Pipeline + NextJS Todo -sovellus
 
 ## Kuvaus
 
